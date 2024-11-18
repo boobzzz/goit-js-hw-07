@@ -14,7 +14,9 @@ const minBoxes = 1;
 createBtn.addEventListener('click', (e) => {
     const inputValue = Number(input.value);
     if (inputValue > minBoxes && inputValue <= maxBoxes) {
+        destroyBoxes();
         createBoxes(inputValue);
+        input.value = '';
     }
 });
 destroyBtn.addEventListener('click', (e) => {
@@ -23,16 +25,18 @@ destroyBtn.addEventListener('click', (e) => {
 
 function createBoxes(amount) {
     const boxParams = {...initBoxParams};
+    const boxElements = [];
     for (let i = 0; i < amount; i++) {
         const box = document.createElement('div');
         box.style.width = `${boxParams.width}px`;
         box.style.height = `${boxParams.height}px`;
         box.style.backgroundColor = getRandomHexColor();
-        boxes.append(box);
+        boxElements.push(box);
 
         boxParams.width += nextBoxStep;
         boxParams.height += nextBoxStep;
     }
+    boxes.append(...boxElements);
 }
 
 function destroyBoxes() {
