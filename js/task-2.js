@@ -14,11 +14,13 @@ const images = [
 ];
 
 const gallery = document.querySelector(".gallery");
+const imageElements = [];
 images.forEach(({url, alt}) => {
     const imgBox = document.createElement("li");
     const img = document.createElement("img");
     img.src = url;
     img.alt = alt;
     imgBox.append(img);
-    gallery.append(imgBox);
+    imageElements.push(imgBox);
 });
+gallery.append(...imageElements);
